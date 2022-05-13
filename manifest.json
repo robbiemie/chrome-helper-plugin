@@ -1,0 +1,23 @@
+{
+  "name": "工作小助手",
+  "version": "1.0",
+  "description": "你的工作小助手.",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "src/index.js"
+  },
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "src/index.html",
+    "default_icon": {
+      "16": "/images/icon.png",
+      "32": "/images/icon.png",
+      "48": "/images/icon.png"
+    }
+  },
+  "icons": {
+    "16": "/images/icon.png",
+    "32": "/images/icon.png",
+    "48": "/images/icon.png"
+  }
+}

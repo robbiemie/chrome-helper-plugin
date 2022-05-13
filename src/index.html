@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工作小助手v1.0</title>
+  <link href="style/index.css" rel="stylesheet">
+  <script src="vender/jquery.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <h1>OST视频音乐解析工具 v1.0</h1>
+      <div class="form">
+        <input class="form-time" type="text" placeholder="请输入开始时间(mm:ss)"/>
+        <button class="form-btn">新增</button> 
+        <button class="form-btn btn-export">导出</button> 
+      </div>
+      <div class="table">
+        <div class="table-header">
+          <div class="table-col">序号</div>
+          <div class="table-col">开始时间(单位s)</div>
+          <div class="table-col">持续时间(单位s)</div>
+          <div class="table-col">开始绝对时间</div>
+        </div>
+        <div class="table-row">
+          <div class="table-col">1</div>
+          <div class="table-col">0</div>
+          <div class="table-col">110</div>
+          <div class="table-col">0:00</div>
+        </div>
+        <div class="table-row">
+          <div class="table-col">2</div>
+          <div class="table-col">0</div>
+          <div class="table-col">210</div>
+          <div class="table-col">1:20</div>
+        </div>
+        <div class="table-row">
+          <div class="table-col">3</div>
+          <div class="table-col">0</div>
+          <div class="table-col">110</div>
+          <div class="table-col">2:00</div>
+        </div>
+        <div class="table-row">
+          <div class="table-col">4</div>
+          <div class="table-col">0</div>
+          <div class="table-col">110</div>
+          <div class="table-col">3:00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="app/main.js"></script>
+</body>
+</html>
