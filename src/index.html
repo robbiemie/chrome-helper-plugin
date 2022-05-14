@@ -7,6 +7,7 @@
   <title>工作小助手v1.0</title>
   <link href="style/index.css" rel="stylesheet">
   <script src="vender/jquery.min.js"></script>
+  <script src="vender/xlsx.js"></script>
 </head>
 <body>
   <div id="app">
@@ -14,7 +15,10 @@
       <h1 class="title">OST视频音乐解析工具 v1.0</h1>
       <div class="form">
         <div class="form-item">
-          <span>视频总结束时间:</span><input class="form-time form-totaltime" type="text" placeholder="只输入一次，时间格式(mm:ss 或者 hh:mm:ss)"/>
+          <span>youtube视频地址:</span><input class="form-time form-youtube" type="text" placeholder="youtube链接地址"/>
+        </div>
+        <div class="form-item">
+          <span>视频总结束时间:</span><input class="form-time form-totaltime" type="text" placeholder="(mm:ss 或者 hh:mm:ss)"/>
         </div>
         <div class="form-item">
           <span>视频开始绝对时间:</span><input class="form-time form-datetime" value="0:0" type="text" placeholder="时间格式(mm:ss 或者 hh:mm:ss)"/>

@@ -1,4 +1,54 @@
-(function() {
+// 文件下载模块
+(function(g){
+  // 字符串转ArrayBuffer
+  function s2ab(s) {
+    let buf = new ArrayBuffer(s.length);
+    let view = new Uint8Array(buf);
+    for (let i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+    return buf;
+  }
+  function sheet2blob(sheet, sheetName) {
+    sheetName = sheetName || 'Sheet1';
+    let workbook = {
+      SheetNames: [sheetName],
+      Sheets: {}
+    };
+    workbook.Sheets[sheetName] = sheet;
+    // 生成excel的配置项
+    let wopts = {
+      bookType: 'xlsx', // 要生成的文件类型
+      bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
+      type: 'binary'
+    };
+    let wbout = XLSX.write(workbook, wopts);
+    let blob = new Blob([s2ab(wbout)], {type:"application/octet-stream"});
+    return blob;
+  }
+  
+  function openDownloadDialog(url, saveName = 'OST-'+new Date().toLocaleString())
+  {
+    if(typeof url == 'object' && url instanceof Blob)
+    {
+      url = URL.createObjectURL(url); // 创建blob地址
+    }
+    let aLink = document.createElement('a');
+    aLink.href = url;
+    aLink.download = saveName + '.xlsx' || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+    let event;
+    if(window.MouseEvent) event = new MouseEvent('click');
+    else
+    {
+      event = document.createEvent('MouseEvents');
+      event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    }
+    aLink.dispatchEvent(event);
+  }
+  g.sheet2blob = sheet2blob
+  g.openDownloadDialog = openDownloadDialog
+})(window);
+
+
+;(function() {
   const store = {
     list: []
   }
@@ -99,6 +149,46 @@
     store.list.pop()
     render()
   }
+  function onClickDownload() {
+    if(store.list.length === 0) {
+      alert('无可导出数据')
+      return
+    }
+    let aoa = [
+      [
+        '语区',
+        '序号（一个语区一套序号，代表了展示的顺序）',
+        '曲子主标题',
+        '曲子副标题',
+        '视频地址',
+        '开始时间（单位s）',
+        '持续时间（单位s）',
+        '开始绝对时间'
+      ],
+    ];
+    let link = $('.form-youtube').val()
+
+    for(let index in store.list) {
+      const data = store.list[index]
+      const linkParams = data.startTime > 0 ? `?t=${data.startTime}` : ''
+      if(data) {
+        aoa.push([
+          'zh-cn',
+          index + 1,
+          '',
+          '',
+          link + linkParams,
+          data.startTime,
+          data.duringTime,
+          data.format
+        ])
+      }
+    }
+    let sheet = XLSX.utils.aoa_to_sheet(aoa);
+    const blob = sheet2blob(sheet);
+    openDownloadDialog(blob)
+  }
+
   function handleScroll() {
     const scrollTop=$(this).scrollTop();
     $('.form')[scrollTop > 60 ? 'addClass' : 'removeClass']('form-fixed')
@@ -106,10 +196,12 @@
   function addEventListener() {
     $('.btn-add').click(onClickAdd)
     $('.btn-delete').click(onClickDelete)
+    $('.btn-export').click(onClickDownload)
     $(window).scroll(handleScroll)
   }
   function main() {
     addEventListener()
   }
+
   main()
 })()
