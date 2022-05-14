@@ -11,11 +11,17 @@
 <body>
   <div id="app">
     <div class="container">
-      <h1>OST视频音乐解析工具 v1.0</h1>
+      <h1 class="title">OST视频音乐解析工具 v1.0</h1>
       <div class="form">
-        <input class="form-time" type="text" placeholder="请输入开始时间(mm:ss)"/>
-        <button class="form-btn">新增</button> 
-        <button class="form-btn btn-export">导出</button> 
+        <div class="form-item">
+          <span>视频总结束时间:</span><input class="form-time form-totaltime" type="text" placeholder="只输入一次，时间格式(mm:ss 或者 hh:mm:ss)"/>
+        </div>
+        <div class="form-item">
+          <span>视频开始绝对时间:</span><input class="form-time form-datetime" value="0:0" type="text" placeholder="时间格式(mm:ss 或者 hh:mm:ss)"/>
+          <button class="form-btn btn-add">新增</button> 
+          <button class="form-btn btn-delete">删除</button> 
+          <button class="form-btn btn-export">导出</button> 
+        </div>
       </div>
       <div class="table">
         <div class="table-header">
@@ -24,29 +30,10 @@
           <div class="table-col">持续时间(单位s)</div>
           <div class="table-col">开始绝对时间</div>
         </div>
-        <div class="table-row">
-          <div class="table-col">1</div>
-          <div class="table-col">0</div>
-          <div class="table-col">110</div>
-          <div class="table-col">0:00</div>
-        </div>
-        <div class="table-row">
-          <div class="table-col">2</div>
-          <div class="table-col">0</div>
-          <div class="table-col">210</div>
-          <div class="table-col">1:20</div>
-        </div>
-        <div class="table-row">
-          <div class="table-col">3</div>
-          <div class="table-col">0</div>
-          <div class="table-col">110</div>
-          <div class="table-col">2:00</div>
-        </div>
-        <div class="table-row">
-          <div class="table-col">4</div>
-          <div class="table-col">0</div>
-          <div class="table-col">110</div>
-          <div class="table-col">3:00</div>
+        <div class="table-content">
+          <div class="table-empty">
+            暂无数据
+          </div>
         </div>
       </div>
     </div>
