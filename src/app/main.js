@@ -133,6 +133,9 @@
       }
       if(duringTime > 0) {
         store.list.push({
+          lang: 'zh-cn',
+          title: '',
+          subTitle: '',
           format,
           startTime,
           duringTime
@@ -173,10 +176,10 @@
       const linkParams = data.startTime > 0 ? `?t=${data.startTime}` : ''
       if(data) {
         aoa.push([
-          'zh-cn',
+          data.lang,
           index + 1,
-          '',
-          '',
+          data.title,
+          data.subTitle,
           link + linkParams,
           data.startTime,
           data.duringTime,
